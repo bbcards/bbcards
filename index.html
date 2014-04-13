@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en-US">
+	<head>
+		<link rel="icon" type="image/x-icon" href="/favicon.ico">
+		<title>Bigger, Blacker Cards</title>
+		<style>
+			html 
+			{
+				background: #000000;
+				color: #ffffff;
+				font-family: Helvetica;
+				font-weight:bold;
+			}
+			body
+			{
+				background: #000000;
+				color: #ffffff;
+				font-family: Helvetica;
+				font-weight:bold;
+				text-align:center;
+			}
+			h1
+			{
+				color: #ffffff;
+				text-shadow: 2px 2px 2px #aaaaaa;
+			}
+			a
+			{
+				color: #ffffff;
+			}
+			a:visited
+			{
+				color:#dddddd;
+			}
+			#header
+			{
+				text-align:center;
+			}
+			.legal
+			{
+				text-align:center;
+				font-size:9px;
+				width:400px;
+				margin-left:auto;
+				margin-right:auto;
+			}
+			.whiteheader
+			{
+				border-radius: 10px; 
+				-moz-border-radius: 10px; 
+				-webkit-border-radius: 10px; 
+				color:#000000;
+				border: 1px solid #000000;
+				background: #ffffff;
+				width: 20%;
+				font-weight:bold;
+				font-family:Helvetica;
+				padding:10px;
+				margin-left:15%;
+				margin-right:0;
+				padding:none;
+				margin-top:3px;
+				margin-bottom:5px;
+				float:left;
+				display:block;
+				text-align:center;
+			}
+			.blackheader
+			{
+				border-radius: 10px; 
+				-moz-border-radius: 10px; 
+				-webkit-border-radius: 10px; 
+				color:#ffffff;
+				border: 1px solid #ffffff;
+				background: #000000;
+				width: 20%;
+				font-weight:bold;
+				font-family:Helvetica;
+				padding:10px;
+				margin-left:25%;
+				margin-right:0;
+				padding:none;
+				margin-top:3px;
+				margin-bottom:5px;
+				float:left;
+				display:block;
+				text-align:center;
+				clear:right;
+			}
+
+			.whiteta
+			{
+				border-radius: 10px; 
+				-moz-border-radius: 10px; 
+				-webkit-border-radius: 10px; 
+				color:#000000;
+				border: 1px solid #000000;
+				background: #ffffff;
+				height: 600px;
+				width: 45%;
+				font-weight:bold;
+				font-family:Helvetica;
+				font-size:11px;
+				padding:10px;
+				margin:5px;
+			}
+			.blackta
+			{
+				border-radius: 10px; 
+				-moz-border-radius: 10px; 
+				-webkit-border-radius: 10px; 
+				color:#ffffff;
+				border: 1px solid #ffffff;
+				background: #000000;
+				height: 600px;
+				width: 45%;
+				font-weight:bold;
+				font-family:Helvetica;
+				font-size:11px;
+				padding:10px;
+				margin:5px;
+				clear:right;
+
+			}
+			.centerdiv
+			{
+				text-align:left;
+				width: 90%;
+				min-width:750px;
+				margin:auto;
+
+				
+			}
+			.controlcontainer
+			{
+				float:left;
+				clear:none;
+				font-size:12px;
+				margin-right:10px;
+			}
+			.control
+			{
+				font-family:Helvetica;
+				margin-left:1.5em;
+			}
+			.genbutton
+			{
+				border-radius:10px;
+				-moz-border-radius: 10px; 
+				-webkit-border-radius: 10px; 
+				background: -moz-linear-gradient(top,#6b6b6b 0%,#000000);
+				background: -webkit-gradient(linear, left top, left bottom,from(#6b6b6b),to(#000000));
+				padding:10px 20px;
+				color:#ffffff;
+				font-weight:bold;
+				font-family:Helvetica;
+				font-size:25px;
+				border:1px solid #000000;
+				-moz-box-shadow:-5px 5px 5px rgba(255,255,255,0.5),inset 0px 0px 1px rgba(255,255,255,1);
+				-webkit-box-shadow:-5px 5px 5px rgba(255,255,255,0.5),inset 0px 0px 1px rgba(255,255,255,1);
+				box-shadow:-5px 5px 5px rgba(255,255,255,0.5),inset 0px 0px 1px rgba(255,255,255,1);
+				margin-left:15px;
+				margin-top:5px;
+				text-shadow: 2px 2px 2px #999999;
+
+			}
+			.genbutton:hover
+			{
+				-moz-box-shadow:-5px 5px 5px rgba(255,255,255,0.75),inset 0px 0px 1px rgba(255,255,255,1);
+				-webkit-box-shadow:-5px 5px 5px rgba(255,255,255,0.75),inset 0px 0px 1px rgba(255,255,255,1);
+				box-shadow:-5px 5px 5px rgba(255,255,255,0.75),inset 0px 0px 1px rgba(255,255,255,1);
+				text-shadow: 2px 2px 2px #cccccc;
+
+
+			}
+			.genbutton:active
+			{
+				margin-top:8px;
+				margin-left:12px;
+				-moz-box-shadow:-2px 2px 5px rgba(255,255,255,0.5),inset 0px 0px 1px rgba(255,255,255,1);
+				-webkit-box-shadow:-2px 2px 5px rgba(255,255,255,0.5),inset 0px 0px 1px rgba(255,255,255,1);
+				box-shadow:-2px 2px 5px rgba(255,255,255,0.5),inset 0px 0px 1px rgba(255,255,255,1);
+
+			}
+
+			.more_header
+			{
+				font-size:18px;
+				text-align:left;
+				clear:both;
+			}
+			.more_text
+			{
+				font-size:14px;
+				font-weight:normal;
+				margin-left:15px;
+			}
+
+
+		</style>
+
+	</head>
+	<body>
+		<div id="header">
+			<h1>Bigger, Blacker Cards</h1>
+			<h4>A custom card generator for<br/><a href="http://www.cardsagainsthumanity.com"><em>Cards Against Humanity</em></a>, a party game for horrible people.</h4>
+			<div class="legal">This site is not affiliated with nor endorsed by Cards Against Humanity, LLC. Cards Against Humanity is a trademark of Cards Against Humanity LLC. Cards Against Humanity is distributed under a Creative Commons BY-NC-SA 2.0 license - that means you can freely use and modify the game but aren't allowed to make money from it without the permission of Cards Against Humanity LLC.</div>
+		</div>
+	
+		<form method="POST" accept-charset="utf-8" action="/cards.pdf" enctype="multipart/form-data" >
+			<div class="centerdiv">
+				<span class="whiteheader"><h3>White Cards<br/>(one per line)</h3></span>	
+				<span class="blackheader"><h3>Black Cards<br/>(one per line)</h3></span>	
+				<br/>
+				<textarea name="whitecards" class="whiteta">
+A large, African-American gentleman named Richard.
+
+A sticky, white substance which, upon closer inspection, <i>might</i> be mayonnaise.
+
+<font name="Comic Sans MS">Inappropriate use of Comic Sans.</font>
+</textarea>	
+<textarea name="blackcards" class="blackta">
+In light of recent events, Congress has passed a new law banning ______.
+
+[[2]]I couldn't imagine anything worse than ______ but then someone suggested I read up on ______.
+
+
+By the year 2020, ______ will become the most popular pastime in America. Why, you ask? There are many reasons, but the two most important factors are: ______ and ______.
+
+[[3]]Name three reasons that I, the current Card Czar, deserve a cupcake.
+</textarea>
+				<br/>
+			
+			
+			
+			
+				<div class="controlcontainer">
+					Card Size:
+					<br/>
+					<input type="radio" name="cardsize" value="S" class="control" checked=true />Small (2"x2")
+					<br/>
+					<input type="radio" name="cardsize" value="L" class="control" />Large (2.5"x3.5")
+					<br/>
+					<input type="radio" name="cardsize" value="LR" class="control" />Large w/Round Corners (2.5"x3.5")
+	
+				</div>
+				<div class="controlcontainer">
+					Page Layout:
+					<br/>
+					<input type="radio" name="pagelayout" value="tiled" class="control" checked=true />Tiled On 8.5"x11" Sheets
+					<br/>
+					<input type="radio" name="pagelayout" value="oneperpage" class="control" />One Card Per Page
+				</div>
+				<div class="controlcontainer">
+					Icon:
+					<br/>
+					<input type="radio" name="icon" value="default" class="control" checked=true />Default
+					<br/>
+					<input type="radio" name="icon" value="custom" class="control"/>Custom
+					<br/>
+					<input type="file" class=control name="iconfile"/>
+				</div>
+				<div class="controlcontainer">
+						<input type="submit" class="genbutton" value="Generate Cards" />
+				</div>				
+				<div class="more_header">
+					<br/>
+					<br/>
+					<u>Instructions:</u>
+					<br/>
+				</div>
+				<div class="more_text">
+				
+					<p>Seperate your white cards and black cards, and put one card on each line. White cards go on the left, black cards go on the right (duh).  If the line wraps, that's ok. Text will shrink as necessary to fit on each card. Zero-length lines won't get turned into cards, so you can separate each card with an empty line to distinguish between wrapping lines and the next card. However, lines containing only spaces will get turned into blank cards. </p>
+			
+					<p>The program will try to detect "Pick 2" and "Pick 3" black cards by the number of blanks in the card, but this can be specfied explicitly by adding [[2]] or [[3]] to the beginning or end of the line.</p>
+
+					<p>You can pick which card size you prefer, the small 2"x2" cards, which match the official PDFs released by <em>Cards Against Humanity</em>, large, rectangular 2.5"x3.5" cards which match the size of full-sized playing cards, or large 2.5"x3.5" with rounded corners.  The cards with rounded corners best match actual playing cards, but cutting the rounded corners will take much longer than cutting out perfectly rectangular cards.</p>
+
+					<p>You can specify as many cards as you want. White cards and black cards will be combined into a single pdf file. If you want, you can specify one card per page, with pages fitted to the size of the cards. Otherwise pdfs will be generated with cards tiled on 8.5"x11" pages. White cards and black cards are rendered on separate pages, with the pages of white cards first then the black cards. If the number of cards specified doesn't fit evenly on a page, the remainder of the page will be filled with blank cards. </p>
+			
+					<p>It is also possible to specify a custom icon, for the lower left hand corner of the cards. The icon will be automatically scaled to the right size. The icon file needs to be either a .jpg or .png file and less than 1MB in size.</p>
+
+					<p>Line text can be formatted with html-like tags. This is handled using the "inline_format" capabilities of the <a href="http://prawnpdf.org/api-docs/">Prawn Ruby library</a> that Bigger, Blacker Cards uses to generate PDF files. The following tags work when added to cards:</p>
+					<ul>
+						<li><strong>&lt;b&gt;&lt;/b&gt;</strong> Bold text. Note that card lettering is bold by default, so you may need to add a closing &lt;/b&gt; tag to eliminate the bold format, followed by another &lt;b&gt; tag to reinstate it.</li>
+						<li><strong>&lt;i&gt;&lt;/i&gt;</strong> Italic text.</li>
+						<li><strong>&lt;u&gt;&lt;/u&gt;</strong> Underlined text.</li>
+						<li><strong>&lt;strikethrough&gt;&lt;/strikethrough&gt;</strong> Strike-through text.</li>
+						<li><strong>&lt;sub&gt;&lt;/sub&gt;</strong> Subscript text.</li>
+						<li><strong>&lt;sup&gt;&lt;/sup&gt;</strong> Superscript text.</li>
+						<li><strong>&lt;br&gt;</strong> Line break.</li>
+						<li><strong>&lt;color rgb="#ff0000"&gt;&lt;/color&gt;</strong> Set color of text, in this example red.</li>
+						<li><strong>&lt;font name="Comic Sans MS"&gt;&lt;/font&gt;</strong> Set font of text, in this example "Comic Sans MS". Be sure to use a valid font name, otherwise the application will crash with an error. Valid fonts include:
+						<ul>
+							<li>Helvetica (the default)</li>
+							<li>Arial</li>
+							<li>Arial Black</li>
+							<li>Andale Mono</li>
+							<li>Comic Sans MS</li>
+							<li>Courier</li>
+							<li>Courier New</li>
+							<li>Georgia</li>
+							<li>Impact</li>
+							<li>Times-Roman</li>
+							<li>Times New Roman</li>
+							<li>Trebuchet MS</li>
+							<li>Verdana</li>
+						</ul>
+					</ul>
+			
+
+				</div>
+				<div class="more_header">
+					<br/>
+					<br/>
+					<u>Source Code:</u>
+					<br/>
+				</div>
+				<div class="more_text">
+					<p>Unlike some other card generators, Bigger, Blacker Cards is 100% open source, available on github under the terms of the GNU GPL: <a href="https://github.com/bbcards/bbcards">https://github.com/bbcards/bbcards</a></p>
+					<p>It works as a web CGI script </em>or</em> as a standalone card generation script that can be run from the command line, on any system with ruby and prawn installed, though it's only been tested on linux.</p>
+
+					<p>However, this is something of a one-off side project for me. I created this to make myself a few custom cards in the format I wanted, and felt the need to share. What that means is that while the code is free, and you are free to modify it, I probably won't be doing much maintenance work.  If you fork the project on github and send a pull request I may get around to merging it... but it might take a bit of time. If a competent developer wants to create a more active fork on github and take over active development, I won't complain. </p>
+				</div>
+
+					<div class="more_header">
+					<br/>
+					<br/>
+					<u>More Legal Crap:</u>
+					<br/>
+				</div>
+				<div class="more_text">
+					<p>I'm going to reiterate the legal disclaimer at the top of the page in slightly larger sized text down here, and expand on it a bit. </p>
+					
+					<p>This site is not affiliated with nor endorsed by Cards Against Humanity, LLC. Cards Against Humanity is a trademark of Cards Against Humanity LLC. Cards Against Humanity is distributed under a Creative Commons BY-NC-SA 2.0 license - that means you can freely use and modify the game but aren't allowed to make money from it without the permission of Cards Against Humanity LLC.</p>
+					
+					<p>There is no donation button on this page, and I'm not making a cent from this project, complying with the required Creative Commons License. All code for this project is open source. I merely enjoy Cards Against Humanity, and wanted a more flexible custom card generator than what was currently available.</p>
+				
+					<p>Also, this should go without saying, but I'm going to say it anyway: Don't use this tool to infringe anyone's intellectual property. Do NOT just plug in the text for existing non-public card packs, that Cards Against Humanity, LLC is selling. That's just not cool. Instead, go to <a href="http://www.cardsagainsthumanity.com">http://www.cardsagainsthumanity.com</a>, and buy their stuff. They made an awesome game, they deserve your money. This tool is for making <em>your own</em> cards, not theirs. That's why there's an option to make big 2.5"x3.5" cards -- that way you can print your own custom cards that are the same size as the official, purchased cards, so they can be used together.</p>
+
+					<p>One final legal note regarding fonts: One of the benefits of this card generator is that it can produce pdf files with cards in custom fonts. The majority of custom fonts available are the ones in <a href="https://en.wikipedia.org/wiki/Core_fonts_for_the_Web">Microsoft's Core fonts for the web</a>. The license for these fonts specifies that they are free for non-commercial use but may not be used in a commercial product or be distributed in a repackaged form. For this reason the source code for this project does not include these font files. Instead these fonts are loaded from /usr/share/fonts/truetype/msttcorefonts, the location of these fonts on Debian-based linux systems when the "ttf-mscorefonts-installer" package is installed. Since this project is non-commercial (again, I make no money whatsoever from this), and I'm not redistributing the collection of fonts, merely including them in documents produced by this generator, I believe that this application complies with the terms of the EULA for these fonts.</p>
+				</div>
+
+			</div>
+		</form>
+	</body>
+
+</html>
