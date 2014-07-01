@@ -113,22 +113,26 @@ def box(pdf, card_geometry, index, &blck)
 	pdf.bounding_box([x,y], width: card_geometry["card_width"]-20, height: card_geometry["card_height"]-10, &blck)
 end
 
-def draw_logos(pdf, card_geometry, icon)
+def draw_logos(pdf, card_geometry, icon, center)
 	idx=0
 	while idx < card_geometry["cards_across"] * card_geometry["cards_high"]
 		box(pdf, card_geometry, idx) do
 			logo_max_height = 15
 			logo_max_width = card_geometry["card_width"]/2
-			pdf.image icon, fit: [logo_max_width,logo_max_height], at: [pdf.bounds.left,pdf.bounds.bottom+25]
+			if center
+				pdf.image icon, fit: [logo_max_width*4,logo_max_height*4], :vposition => :center, :position => :center
+			else
+				pdf.image icon, fit: [logo_max_width,logo_max_height], at: [pdf.bounds.left,pdf.bounds.bottom+25]
+			end
 		end
-		idx = idx + 1
+			idx = idx + 1
 	end
 end
 
 
 
 
-def render_card_page(pdf, card_geometry, icon, statements, is_black)
+def render_card_page(pdf, card_geometry, icon, statements, is_black, is_logo_page)
 	
 	pdf.font "Helvetica", :style => :normal
 	pdf.font_size = 14
@@ -153,178 +157,180 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 	end
 
 	draw_grid(pdf, card_geometry)
-	statements.each_with_index do |line, idx|
-		box(pdf, card_geometry, idx) do
-			
-			line_parts = line.split(/\t/)
-			card_text = line_parts.shift
-			card_text = card_text.gsub(/\\n */, "\n")
-			card_text = card_text.gsub(/\\t/,   "\t")
+	if !is_logo_page 
+		statements.each_with_index do |line, idx|
+			box(pdf, card_geometry, idx) do
+				
+				line_parts = line.split(/\t/)
+				card_text = line_parts.shift
+				card_text = card_text.gsub(/\\n */, "\n")
+				card_text = card_text.gsub(/\\t/,   "\t")
 
-			card_text = card_text.gsub("<b>", "[[[b]]]")
-			card_text = card_text.gsub("<i>", "[[[i]]]")
-			card_text = card_text.gsub("<u>", "[[[u]]]")
-			card_text = card_text.gsub("<strikethrough>", "[[[strikethrough]]]")
-			card_text = card_text.gsub("<sub>", "[[[sub]]]")
-			card_text = card_text.gsub("<sup>", "[[[sup]]]")
-			card_text = card_text.gsub("<font", "[[[font")
-			card_text = card_text.gsub("<color", "[[[color")
-			card_text = card_text.gsub("<br>", "[[[br/]]]")
-			card_text = card_text.gsub("<br/>", "[[[br/]]]")
-			card_text = card_text.gsub("<br />", "[[[br/]]]")
+				card_text = card_text.gsub("<b>", "[[[b]]]")
+				card_text = card_text.gsub("<i>", "[[[i]]]")
+				card_text = card_text.gsub("<u>", "[[[u]]]")
+				card_text = card_text.gsub("<strikethrough>", "[[[strikethrough]]]")
+				card_text = card_text.gsub("<sub>", "[[[sub]]]")
+				card_text = card_text.gsub("<sup>", "[[[sup]]]")
+				card_text = card_text.gsub("<font", "[[[font")
+				card_text = card_text.gsub("<color", "[[[color")
+				card_text = card_text.gsub("<br>", "[[[br/]]]")
+				card_text = card_text.gsub("<br/>", "[[[br/]]]")
+				card_text = card_text.gsub("<br />", "[[[br/]]]")
 
-			card_text = card_text.gsub("</b>", "[[[/b]]]")
-			card_text = card_text.gsub("</i>", "[[[/i]]]")
-			card_text = card_text.gsub("</u>", "[[[/u]]]")
-			card_text = card_text.gsub("</strikethrough>", "[[[/strikethrough]]]")
-			card_text = card_text.gsub("</sub>", "[[[/sub]]]")
-			card_text = card_text.gsub("</sup>", "[[[/sup]]]")
-			card_text = card_text.gsub("</font>", "[[[/font]]]")
-			card_text = card_text.gsub("</color>", "[[[/color]]]")
+				card_text = card_text.gsub("</b>", "[[[/b]]]")
+				card_text = card_text.gsub("</i>", "[[[/i]]]")
+				card_text = card_text.gsub("</u>", "[[[/u]]]")
+				card_text = card_text.gsub("</strikethrough>", "[[[/strikethrough]]]")
+				card_text = card_text.gsub("</sub>", "[[[/sub]]]")
+				card_text = card_text.gsub("</sup>", "[[[/sup]]]")
+				card_text = card_text.gsub("</font>", "[[[/font]]]")
+				card_text = card_text.gsub("</color>", "[[[/color]]]")
 
 
-			card_text = card_text.gsub(/</, "&lt;");
+				card_text = card_text.gsub(/</, "&lt;");
 
-			
-			card_text = card_text.gsub("\[\[\[b\]\]\]", "<b>")
-			card_text = card_text.gsub("\[\[\[i\]\]\]", "<i>")
-			card_text = card_text.gsub("\[\[\[u\]\]\]", "<u>")
-			card_text = card_text.gsub("\[\[\[strikethrough\]\]\]", "<strikethrough>")
-			card_text = card_text.gsub("\[\[\[sub\]\]\]", "<sub>")
-			card_text = card_text.gsub("\[\[\[sup\]\]\]", "<sup>")
-			card_text = card_text.gsub("\[\[\[font", "<font")
-			card_text = card_text.gsub("\[\[\[color", "<color")
-			card_text = card_text.gsub("\[\[\[br/\]\]\]", "<br/>")
+				
+				card_text = card_text.gsub("\[\[\[b\]\]\]", "<b>")
+				card_text = card_text.gsub("\[\[\[i\]\]\]", "<i>")
+				card_text = card_text.gsub("\[\[\[u\]\]\]", "<u>")
+				card_text = card_text.gsub("\[\[\[strikethrough\]\]\]", "<strikethrough>")
+				card_text = card_text.gsub("\[\[\[sub\]\]\]", "<sub>")
+				card_text = card_text.gsub("\[\[\[sup\]\]\]", "<sup>")
+				card_text = card_text.gsub("\[\[\[font", "<font")
+				card_text = card_text.gsub("\[\[\[color", "<color")
+				card_text = card_text.gsub("\[\[\[br/\]\]\]", "<br/>")
 
-			card_text = card_text.gsub("\[\[\[/b\]\]\]", "</b>")
-			card_text = card_text.gsub("\[\[\[/i\]\]\]", "</i>")
-			card_text = card_text.gsub("\[\[\[/u\]\]\]", "</u>")
-			card_text = card_text.gsub("\[\[\[/strikethrough\]\]\]", "</strikethrough>")
-			card_text = card_text.gsub("\[\[\[/sub\]\]\]", "</sub>")
-			card_text = card_text.gsub("\[\[\[/sup\]\]\]", "</sup>")
-			card_text = card_text.gsub("\[\[\[/font\]\]\]", "</font>")
-			card_text = card_text.gsub("\[\[\[/color\]\]\]", "</color>")
+				card_text = card_text.gsub("\[\[\[/b\]\]\]", "</b>")
+				card_text = card_text.gsub("\[\[\[/i\]\]\]", "</i>")
+				card_text = card_text.gsub("\[\[\[/u\]\]\]", "</u>")
+				card_text = card_text.gsub("\[\[\[/strikethrough\]\]\]", "</strikethrough>")
+				card_text = card_text.gsub("\[\[\[/sub\]\]\]", "</sub>")
+				card_text = card_text.gsub("\[\[\[/sup\]\]\]", "</sup>")
+				card_text = card_text.gsub("\[\[\[/font\]\]\]", "</font>")
+				card_text = card_text.gsub("\[\[\[/color\]\]\]", "</color>")
 
-			
+				
 
-			parts = card_text.split(/\[\[/)
-			card_text = ""
-			first = true
-			previous_matches = false
-			parts.each do |p|
-				n = p
-				this_matches=false
-				if p.match(/\]\]/)
-					s = p.split(/\]\]/)
-					line_parts.push(s[0])
-					if s.length > 1
-						n = s[1]
-					else
-						n = ""
+				parts = card_text.split(/\[\[/)
+				card_text = ""
+				first = true
+				previous_matches = false
+				parts.each do |p|
+					n = p
+					this_matches=false
+					if p.match(/\]\]/)
+						s = p.split(/\]\]/)
+						line_parts.push(s[0])
+						if s.length > 1
+							n = s[1]
+						else
+							n = ""
+						end
+						this_matches=true
 					end
-					this_matches=true
+
+					if first
+						card_text = n.to_s
+					elsif this_matches
+						card_text = card_text + n
+					else
+						card_text = card_text + "[[" + n
+					end
+					first = false
 				end
-
-				if first
-					card_text = n.to_s
-				elsif this_matches
-					card_text = card_text + n
-				else
-					card_text = card_text + "[[" + n
-				end
-				first = false
-			end
-			card_text = card_text.gsub(/^[\t ]*/, "")
-			card_text = card_text.gsub(/[\t ]*$/, "")
+				card_text = card_text.gsub(/^[\t ]*/, "")
+				card_text = card_text.gsub(/[\t ]*$/, "")
 
 
-			
-			is_pick2 = false
-			is_pick3 = false
-			if is_black
-				pick_num = line_parts.shift
-				if pick_num.nil? or pick_num == ""
-					tmpline = "a" + card_text.to_s + "a"
-					parts = tmpline.split(/__+/)
-					if parts.length == 3
+				
+				is_pick2 = false
+				is_pick3 = false
+				if is_black
+					pick_num = line_parts.shift
+					if pick_num.nil? or pick_num == ""
+						tmpline = "a" + card_text.to_s + "a"
+						parts = tmpline.split(/__+/)
+						if parts.length == 3
+							is_pick2 = true
+						elsif parts.length >= 4
+							is_pick3 = true
+						end
+					elsif pick_num == "2"
 						is_pick2 = true
-					elsif parts.length >= 4
+					elsif pick_num == "3"
 						is_pick3 = true
 					end
-				elsif pick_num == "2"
-					is_pick2 = true
-				elsif pick_num == "3"
-					is_pick3 = true
+
 				end
 
-			end
-
-			
-			picknum = "0"
-			if is_pick2
-				picknum = "2"
-			elsif is_pick3
-				picknum = "3"
-			elsif is_black
-				picknum = "1"
-			end
-
-			statements[idx] = [card_text,picknum]
-
-			#by default cards should be bold
-			card_text = "<b>" + card_text + "</b>"
-
-
-
-			# Text
-			pdf.font "Helvetica", :style => :normal
-
-			if is_pick3
-				pdf.text_box card_text.to_s, :overflow => :shrink_to_fit, :height =>card_geometry["card_height"]-55, :inline_format => true
-			else
-				pdf.text_box card_text.to_s, :overflow => :shrink_to_fit, :height =>card_geometry["card_height"]-35, :inline_format => true
-			end
-	
-			pdf.font "Helvetica", :style => :bold
-			#pick 2
-			if is_pick2
-				pdf.text_box "PICK", size:11, align: :right, width:30, at: [pdf.bounds.right-50,pdf.bounds.bottom+20]
-				pdf.fill_and_stroke(:fill_color=>"ffffff", :stroke_color=>"ffffff") do
-					pdf.circle([pdf.bounds.right-10,pdf.bounds.bottom+15.5],7.5)
+				
+				picknum = "0"
+				if is_pick2
+					picknum = "2"
+				elsif is_pick3
+					picknum = "3"
+				elsif is_black
+					picknum = "1"
 				end
-				pdf.stroke_color '000000'
-				pdf.fill_color '000000'
-				pdf.text_box "2", color:"000000", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+21]
-				pdf.stroke_color "ffffff"
-				pdf.fill_color "ffffff"
-			end
-	
-			#pick 3
-			if is_pick3
-				pdf.text_box "PICK", size:11, align: :right, width:30, at: [pdf.bounds.right-50,pdf.bounds.bottom+20]
-				pdf.fill_and_stroke(:fill_color=>"ffffff", :stroke_color=>"ffffff") do
-					pdf.circle([pdf.bounds.right-10,pdf.bounds.bottom+15.5],7.5)
-				end
-				pdf.stroke_color '000000'
-				pdf.fill_color '000000'
-				pdf.text_box "3", color:"000000", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+21]
-				pdf.stroke_color "ffffff"
-				pdf.fill_color "ffffff"
+
+				statements[idx] = [card_text,picknum]
+
+				#by default cards should be bold
+				card_text = "<b>" + card_text + "</b>"
 
 
-				pdf.text_box "DRAW", size:11, align: :right, width:35, at: [pdf.bounds.right-55,pdf.bounds.bottom+40]
-				pdf.fill_and_stroke(:fill_color=>"ffffff", :stroke_color=>"ffffff") do
-					pdf.circle([pdf.bounds.right-10,pdf.bounds.bottom+35.5],7.5)
+
+				# Text
+				pdf.font "Helvetica", :style => :normal
+
+				if is_pick3
+					pdf.text_box card_text.to_s, :overflow => :shrink_to_fit, :height =>card_geometry["card_height"]-55, :inline_format => true
+				else
+					pdf.text_box card_text.to_s, :overflow => :shrink_to_fit, :height =>card_geometry["card_height"]-35, :inline_format => true
 				end
-				pdf.stroke_color '000000'
-				pdf.fill_color '000000'
-				pdf.text_box "2", color:"000000", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+41]
-				pdf.stroke_color "ffffff"
-				pdf.fill_color "ffffff"
+		
+				pdf.font "Helvetica", :style => :bold
+				#pick 2
+				if is_pick2
+					pdf.text_box "PICK", size:11, align: :right, width:30, at: [pdf.bounds.right-50,pdf.bounds.bottom+20]
+					pdf.fill_and_stroke(:fill_color=>"ffffff", :stroke_color=>"ffffff") do
+						pdf.circle([pdf.bounds.right-10,pdf.bounds.bottom+15.5],7.5)
+					end
+					pdf.stroke_color '000000'
+					pdf.fill_color '000000'
+					pdf.text_box "2", color:"000000", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+21]
+					pdf.stroke_color "ffffff"
+					pdf.fill_color "ffffff"
+				end
+		
+				#pick 3
+				if is_pick3
+					pdf.text_box "PICK", size:11, align: :right, width:30, at: [pdf.bounds.right-50,pdf.bounds.bottom+20]
+					pdf.fill_and_stroke(:fill_color=>"ffffff", :stroke_color=>"ffffff") do
+						pdf.circle([pdf.bounds.right-10,pdf.bounds.bottom+15.5],7.5)
+					end
+					pdf.stroke_color '000000'
+					pdf.fill_color '000000'
+					pdf.text_box "3", color:"000000", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+21]
+					pdf.stroke_color "ffffff"
+					pdf.fill_color "ffffff"
+
+
+					pdf.text_box "DRAW", size:11, align: :right, width:35, at: [pdf.bounds.right-55,pdf.bounds.bottom+40]
+					pdf.fill_and_stroke(:fill_color=>"ffffff", :stroke_color=>"ffffff") do
+						pdf.circle([pdf.bounds.right-10,pdf.bounds.bottom+35.5],7.5)
+					end
+					pdf.stroke_color '000000'
+					pdf.fill_color '000000'
+					pdf.text_box "2", color:"000000", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+41]
+					pdf.stroke_color "ffffff"
+					pdf.fill_color "ffffff"
+				end
 			end
 		end
 	end
-	draw_logos(pdf, card_geometry, icon)
+	draw_logos(pdf, card_geometry, icon, is_logo_page)
 	pdf.stroke_color "000000"
 	pdf.fill_color "000000"
 
@@ -433,7 +439,7 @@ def load_ttf_fonts(font_dir, font_families)
 end
 
 
-def render_cards(directory=".", white_file="white.txt", black_file="black.txt", icon_file="icon.png", output_file="cards.pdf", input_files_are_absolute=false, output_file_name_from_directory=true, recurse=true, card_geometry=get_card_geometry, white_string="", black_string="", output_to_stdout=false, title=nil )
+def render_cards(directory=".", white_file="white.txt", black_file="black.txt", icon_file="icon.png", output_file="cards.pdf", input_files_are_absolute=false, output_file_name_from_directory=true, recurse=true, card_geometry=get_card_geometry, white_string="", black_string="", output_to_stdout=false, title=nil, print_background=false )
 	
 	original_white_file = white_file
 	original_black_file = black_file
@@ -468,7 +474,7 @@ def render_cards(directory=".", white_file="white.txt", black_file="black.txt", 
 	if white_file == nil and black_file == nil and white_string == "" and black_string == ""
 		white_string = " "
 		black_string = " "
-	end
+g	end
 	if white_string != "" || white_file == nil
 		white_pages = load_pages_from_string(white_string, card_geometry)
 	else
@@ -495,12 +501,20 @@ def render_cards(directory=".", white_file="white.txt", black_file="black.txt", 
 
 
 		white_pages.each_with_index do |statements, page|
-			render_card_page(pdf, card_geometry, icon_file, statements, false)
+			render_card_page(pdf, card_geometry, icon_file, statements, false, false) #render front of cards
+			if print_background
+				pdf.start_new_page
+				render_card_page(pdf, card_geometry, icon_file, statements, false, true) #render back of cards
+			end
 			pdf.start_new_page unless page >= white_pages.length-1
 		end
 		pdf.start_new_page unless white_pages.length == 0 || black_pages.length == 0
 		black_pages.each_with_index do |statements, page|
-			render_card_page(pdf, card_geometry, icon_file, statements, true)
+			render_card_page(pdf, card_geometry, icon_file, statements, true, false) #render front of cards
+			if print_background
+				pdf.start_new_page
+				render_card_page(pdf, card_geometry, icon_file, statements, true, true) #render back of cards
+			end
 			pdf.start_new_page unless page >= black_pages.length-1
 		end
 
@@ -589,6 +603,7 @@ def print_help
 	puts "All flags:"
 	puts "\t-b,--black\t\tBlack card file"
 	puts "\t-d,--dir\t\tDirectory to search for card files"
+	puts "\t-g,--background\t\tPrint card back pages with logo for duplex printing"
 	puts "\t-h,--help\t\tPrint this Help message"
 	puts "\t-i,--icon\t\tIcon file, should be .jpg or .png"
 	puts "\t-l,--large\t\tGenerate large 2.5\"x3.5\" cards"
@@ -646,13 +661,15 @@ else
 	arg_defs["--icon"]      = "icon"
 	arg_defs["-o"]          = "output"
 	arg_defs["-output"]     = "output"
-
+	
 	flag_defs["-s"]            = "small"
 	flag_defs["--small"]       = "small"
 	flag_defs["-l"]            = "large"
 	flag_defs["--large"]       = "large"
 	flag_defs["-r"]            = "rounded"
 	flag_defs["--rounded"]     = "rounded"
+	flag_defs["-g"]			   = "background"
+	flag_defs["--background"]  = "background"
 	flag_defs["-p"]            = "oneperpage"
 	flag_defs["--oneperpage"]  = "oneperpage"
 	flag_defs["-h"]            = "help"
@@ -668,11 +685,9 @@ else
 	if args.has_key? "help" or args.length == 0 or ( (not args.has_key? "white") and (not args.has_key? "black") and (not args.has_key? "dir") )
 		print_help
 	elsif args.has_key? "dir"
-		render_cards args["dir"], "white.txt", "black.txt", "icon.png", "cards.pdf", false, true, true, card_geometry, "", "", false
+		render_cards args["dir"], "white.txt", "black.txt", "icon.png", "cards.pdf", false, true, true, card_geometry, "", "", false, nil, (args.has_key? "background")
 	else
-		render_cards nil, args["white"], args["black"], args["icon"], args["output"], true, false, false, card_geometry, "", "", false
+		render_cards nil, args["white"], args["black"], args["icon"], args["output"], true, false, false, card_geometry, "", "", false, nil, (args.has_key? "background")
 	end
 end
 exit
-
-
