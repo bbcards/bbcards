@@ -2,348 +2,509 @@
 <html lang="en-US">
 	<head>
 		<link rel="icon" type="image/x-icon" href="/favicon.ico">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script>
+			$(function() {
+				$('a[title]').tooltip();
+			});
+		</script>
 		<title>Bigger, Blacker Cards</title>
 		<style>
-			html 
-			{
-				background: #000000;
-				color: #ffffff;
-				font-family: Helvetica;
-				font-weight:bold;
+			@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,800);
+			body {
+				font-family: 'Open Sans', Helvetica, Arial, sans-serif !important;
 			}
-			body
-			{
-				background: #000000;
-				color: #ffffff;
-				font-family: Helvetica;
-				font-weight:bold;
-				text-align:center;
+
+			a, a:visited, a:hover {
+				color: rgb(51, 51, 51);
+				text-decoration: underline;
 			}
-			h1
-			{
-				color: #ffffff;
-				text-shadow: 2px 2px 2px #aaaaaa;
+
+			a:hover {
+				text-decoration: none;
 			}
-			a
-			{
-				color: #ffffff;
+
+			.center {
+				text-align: center;
 			}
-			a:visited
-			{
-				color:#dddddd;
+
+			.small {
+				font-size: 0.8em;
 			}
-			#header
-			{
-				text-align:center;
+
+			.row {
+				padding-top: 15px;
 			}
-			.legal
-			{
-				text-align:center;
-				font-size:9px;
-				width:400px;
-				margin-left:auto;
-				margin-right:auto;
+
+			h1 {
+				font-size: 4em;
+				font-weight: 700;
 			}
-			.whiteheader
-			{
-				border-radius: 10px; 
-				-moz-border-radius: 10px; 
-				-webkit-border-radius: 10px; 
-				color:#000000;
-				border: 1px solid #000000;
-				background: #ffffff;
+
+			.header {
+				background-color: #232323;
+				color: white;
+				padding: 40px 0 40px 0;
+			}
+
+			.header a, .header a:visited, .header a:hover {
+				color: white;
+				text-decoration: underline;
+			}
+
+			.header a:hover {
+				text-decoration: none;
+			}
+
+			.whitecards, .blackcards {
+				-moz-border-radius: 10px;
+				-webkit-border-radius: 10px;
+				-webkit-box-shadow: 5px 5px 20px 0 #4D4D4D;
+				box-shadow: 5px 5px 20px 0 #4D4D4D;
+				border-radius: 10px;
+				font-weight: 700;
+			}
+
+			.whitecards {
+				border: 1px solid black;
+				background: white;
+				color: black;
+			}
+
+			.blackcards {
+				border: 1px solid black;
+				background: black;
+				color: white;
+			}
+
+			textarea.whitecards, textarea.blackcards {
+				height: 400px;
+			}
+
+			.btn-primary {
+				background-color: hsl(0, 0%, 16%) !important;
+				background-repeat: repeat-x;
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5b5b5b", endColorstr="#282828");
+				background-image: -khtml-gradient(linear, left top, left bottom, from(#5b5b5b), to(#282828));
+				background-image: -moz-linear-gradient(top, #5b5b5b, #282828);
+				background-image: -ms-linear-gradient(top, #5b5b5b, #282828);
+				background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b5b5b), color-stop(100%, #282828));
+				background-image: -webkit-linear-gradient(top, #5b5b5b, #282828);
+				background-image: -o-linear-gradient(top, #5b5b5b, #282828);
+				background-image: linear-gradient(#5b5b5b, #282828);
+				border-color: #282828 #282828 hsl(0, 0%, 11%);
+				color: #fff !important;
+				text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
+				-webkit-font-smoothing: antialiased;
+			}
+
+			.board {
+				width: 75%;
+				margin-left: auto;
+				margin-right: auto;
+				height: auto !important;
+				background: #fff;
+			}
+
+			.board .nav-tabs {
+			    position: relative;
+			    margin: 40px auto;
+			    margin-bottom: 0;
+			    box-sizing: border-box;
+			}
+
+			.board > div.board-inner {
+			}
+
+			.btn-file {
+				position: relative;
+				overflow: hidden;
+			}
+
+			.btn-file input[type=file] {
+				position: absolute;
+				top: 0;
+				right: 0;
+				min-width: 100%;
+				min-height: 100%;
+				font-size: 100px;
+				text-align: right;
+				filter: alpha(opacity=0);
+				opacity: 0;
+				outline: none;
+				background: white;
+				cursor: inherit;
+				display: block;
+			}
+
+			.liner {
+				height: 2px;
+			   background: #ddd;
+			   position: absolute;
+			   width: 80%;
+			   margin: 0 auto;
+			   left: 0;
+			   right: 0;
+			   top: 50%;
+			   z-index: 1;
+			}
+
+			span.round-tabs {
+			   width: 70px;
+			   height: 70px;
+			   line-height: 70px;
+			   display: inline-block;
+			   border-radius: 100px;
+			   background: white;
+			   z-index: 2;
+			   position: absolute;
+			   left: 0;
+			   text-align: center;
+				font-size: 25px;
+				border: 2px solid rgb(140, 140, 140);
+			}
+
+			li.active {
+				border-bottom: 1px solid #ddd;
+			}
+
+			span.round-tabs.one {
+			   color: rgb(34, 194, 34);
+				border: 2px solid rgb(34, 194, 34);
+			}
+
+			span.round-tabs.two {
+				color: #febe29;
+				border: 2px solid #febe29;
+			}
+
+			span.round-tabs.three {
+				color: #3e5e9a;
+				border: 2px solid #3e5e9a;
+			}
+
+			span.round-tabs.four {
+				color: #f1685e;
+				border: 2px solid #f1685e;
+			}
+
+			.nav-tabs > li.active > a span.round-tabs {
+				background: #fafafa;
+			}
+
+			.nav-tabs > li {
 				width: 20%;
-				font-weight:bold;
-				font-family:Helvetica;
-				padding:10px;
-				margin-left:15%;
-				margin-right:0;
-				padding:none;
-				margin-top:3px;
-				margin-bottom:5px;
-				float:left;
-				display:block;
-				text-align:center;
-			}
-			.blackheader
-			{
-				border-radius: 10px; 
-				-moz-border-radius: 10px; 
-				-webkit-border-radius: 10px; 
-				color:#ffffff;
-				border: 1px solid #ffffff;
-				background: #000000;
-				width: 20%;
-				font-weight:bold;
-				font-family:Helvetica;
-				padding:10px;
-				margin-left:25%;
-				margin-right:0;
-				padding:none;
-				margin-top:3px;
-				margin-bottom:5px;
-				float:left;
-				display:block;
-				text-align:center;
-				clear:right;
 			}
 
-			.whiteta
-			{
-				border-radius: 10px; 
-				-moz-border-radius: 10px; 
-				-webkit-border-radius: 10px; 
-				color:#000000;
-				border: 1px solid #000000;
-				background: #ffffff;
-				height: 600px;
-				width: 45%;
-				font-weight:bold;
-				font-family:Helvetica;
-				font-size:11px;
-				padding:10px;
-				margin:5px;
-			}
-			.blackta
-			{
-				border-radius: 10px; 
-				-moz-border-radius: 10px; 
-				-webkit-border-radius: 10px; 
-				color:#ffffff;
-				border: 1px solid #ffffff;
-				background: #000000;
-				height: 600px;
-				width: 45%;
-				font-weight:bold;
-				font-family:Helvetica;
-				font-size:11px;
-				padding:10px;
-				margin:5px;
-				clear:right;
-
-			}
-			.centerdiv
-			{
-				text-align:left;
-				width: 90%;
-				min-width:750px;
-				margin:auto;
-
-				
-			}
-			.controlcontainer
-			{
-				float:left;
-				clear:none;
-				font-size:12px;
-				margin-right:10px;
-			}
-			.control
-			{
-				font-family:Helvetica;
-				margin-left:1.5em;
-			}
-			.genbutton
-			{
-				border-radius:10px;
-				-moz-border-radius: 10px; 
-				-webkit-border-radius: 10px; 
-				background: -moz-linear-gradient(top,#6b6b6b 0%,#000000);
-				background: -webkit-gradient(linear, left top, left bottom,from(#6b6b6b),to(#000000));
-				padding:10px 20px;
-				color:#ffffff;
-				font-weight:bold;
-				font-family:Helvetica;
-				font-size:25px;
-				border:1px solid #000000;
-				-moz-box-shadow:-5px 5px 5px rgba(255,255,255,0.5),inset 0px 0px 1px rgba(255,255,255,1);
-				-webkit-box-shadow:-5px 5px 5px rgba(255,255,255,0.5),inset 0px 0px 1px rgba(255,255,255,1);
-				box-shadow:-5px 5px 5px rgba(255,255,255,0.5),inset 0px 0px 1px rgba(255,255,255,1);
-				margin-left:15px;
-				margin-top:5px;
-				text-shadow: 2px 2px 2px #999999;
-
-			}
-			.genbutton:hover
-			{
-				-moz-box-shadow:-5px 5px 5px rgba(255,255,255,0.75),inset 0px 0px 1px rgba(255,255,255,1);
-				-webkit-box-shadow:-5px 5px 5px rgba(255,255,255,0.75),inset 0px 0px 1px rgba(255,255,255,1);
-				box-shadow:-5px 5px 5px rgba(255,255,255,0.75),inset 0px 0px 1px rgba(255,255,255,1);
-				text-shadow: 2px 2px 2px #cccccc;
-
-
-			}
-			.genbutton:active
-			{
-				margin-top:8px;
-				margin-left:12px;
-				-moz-box-shadow:-2px 2px 5px rgba(255,255,255,0.5),inset 0px 0px 1px rgba(255,255,255,1);
-				-webkit-box-shadow:-2px 2px 5px rgba(255,255,255,0.5),inset 0px 0px 1px rgba(255,255,255,1);
-				box-shadow:-2px 2px 5px rgba(255,255,255,0.5),inset 0px 0px 1px rgba(255,255,255,1);
-
+			li:after {
+				content: " ";
+				position: absolute;
+				left: 45%;
+				opacity:0;
+				margin: 0 auto;
+				bottom: 0px;
+				border: 5px solid transparent;
+				border-bottom-color: #ddd;
+				transition:0.1s ease-in-out;
 			}
 
-			.more_header
-			{
-				font-size:18px;
-				text-align:left;
-				clear:both;
-			}
-			.more_text
-			{
-				font-size:14px;
-				font-weight:normal;
-				margin-left:15px;
+			li.active:after {
+				content: " ";
+				position: absolute;
+				left: 45%;
+				opacity:1;
+				margin: 0 auto;
+				bottom: 0px;
+				border: 10px solid transparent;
+				border-bottom-color: #ddd;
 			}
 
+			.nav-tabs > li a {
+				width: 70px;
+				height: 70px;
+				margin: 20px auto;
+				border-radius: 100%;
+				padding: 0;
+				color: #555;
+			}
 
+			.nav-tabs > li a:hover {
+				background: transparent;
+			}
+
+			.tab-pane {
+				position: relative;
+				padding-top: 50px;
+			}
+
+			.tab-content .head {
+				font-family: 'Roboto Condensed', sans-serif;
+				font-size: 25px;
+				text-transform: uppercase;
+				padding-bottom: 10px;
+			}
+
+			@media( max-width : 991px ) {
+				.well.blackcards {
+					margin-top: 20px;
+				}
+			}
+
+			@media( max-width : 585px ) {
+				h1 {
+					font-size: 3em;
+				}
+
+				.board {
+					width: 90%;
+					height: auto !important;
+				}
+
+				span.round-tabs {
+					font-size:16px;
+					width: 50px;
+					height: 50px;
+					line-height: 50px;
+				}
+
+				.nav-tabs > li a {
+					width: 50px;
+					height: 50px;
+					line-height:50px;
+				}
+
+				li.active:after {
+					content: " ";
+					position: absolute;
+					left: 35%;
+				}
+
+				.btn-outline-rounded {
+					 padding: 12px 20px;
+				 }
+			}
 		</style>
 
 	</head>
 	<body>
-		<div id="header">
-			<h1>Bigger, Blacker Cards</h1>
-			<h4>A custom card generator for<br/><a href="http://www.cardsagainsthumanity.com"><em>Cards Against Humanity</em></a>, a party game for horrible people.</h4>
-			<div class="legal">This site is not affiliated with nor endorsed by Cards Against Humanity, LLC. Cards Against Humanity is a trademark of Cards Against Humanity LLC. Cards Against Humanity is distributed under a Creative Commons BY-NC-SA 2.0 license - that means you can freely use and modify the game but aren't allowed to make money from it without the permission of Cards Against Humanity LLC.</div>
-		</div>
-	
-		<form method="POST" accept-charset="utf-8" action="/cards.pdf" enctype="multipart/form-data" >
-			<div class="centerdiv">
-				<span class="whiteheader"><h3>White Cards<br/>(one per line)</h3></span>	
-				<span class="blackheader"><h3>Black Cards<br/>(one per line)</h3></span>	
-				<br/>
-				<textarea name="whitecards" class="whiteta">
-A large, African-American gentleman named Richard.
+		<div class="container-fluid">
+			<div class="row header">
+				<div class="col-md-6 col-md-offset-3 center">
+					<h1>Bigger, Blacker Cards</h1>
+					<h3>A custom card generator for<br/><a href="http://www.cardsagainsthumanity.com"><em>Cards Against Humanity</em></a>, a party game for horrible people.</h3>
+					<div class="row small">
+						<div class="col-md-12">This site is not affiliated with nor endorsed by Cards Against Humanity, LLC. Cards Against Humanity is a trademark of Cards Against Humanity LLC. Cards Against Humanity is distributed under a Creative Commons BY-NC-SA 2.0 license - that means you can freely use and modify the game but aren't allowed to make money from it without the permission of Cards Against Humanity LLC.</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+			  <div class="board">
+				 <div class="board-inner">
+					<ul class="nav nav-tabs" id="myTab">
+					  <div class="liner"></div>
+					  <li class="active">
+						 <a href="#generate" data-toggle="tab" title="Generate">
+							<span class="round-tabs">
+								<i class="fa fa-th"></i>
+							</span> 
+						 </a>
+					  </li>
+					  <li>
+						 <a href="#instructions" data-toggle="tab" title="Instructions">
+							<span class="round-tabs">
+								<i class="fa fa-tasks"></i>
+							</span> 
+						 </a>
+					  </li>
+					  <li>
+						 <a href="#source" data-toggle="tab" title="Source Code">
+							<span class="round-tabs">
+								<i class="fa fa-code"></i>
+							</span> 
+						 </a>
+					  </li>
+					  <li>
+						 <a href="#legal" data-toggle="tab" title="Legal">
+							<span class="round-tabs">
+							<i class="fa fa-gavel"></i>
+							</span>
+						 </a>
+					  </li>
+					  <li>
+						 <a href="#donate" data-toggle="tab" title="Donate">
+							<span class="round-tabs">
+							<i class="fa fa-usd"></i>
+							</span>
+						 </a>
+					  </li>
+					</ul>
+				 </div>
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="generate">
+						<div class="row">
+							<form class="col-md-12" method="POST" accept-charset="utf-8" action="/cards.pdf" enctype="multipart/form-data">
+								<div class="row">
+									<div class="col-md-12 form-group">
+										<div class="col-md-6">
+											<div class="well whitecards center">
+												<h3>White Cards</h3>
+											</div>
+											<textarea class="form-control whitecards" rows="15" name="whitecards">A large, African-American gentleman named Richard.
 
 A sticky, white substance which, upon closer inspection, <i>might</i> be mayonnaise.
 
-<font name="Comic Sans MS">Inappropriate use of Comic Sans.</font>
-</textarea>	
-<textarea name="blackcards" class="blackta">
-In light of recent events, Congress has passed a new law banning ______.
+<font name="Comic Sans MS">Inappropriate use of Comic Sans.</font></textarea>	
+										</div>
+										<div class="col-md-6">
+											<div class="well blackcards center">
+												<h3>Black Cards</h3>
+											</div>
+											<textarea class="form-control blackcards" rows="15" name="blackcards">In light of recent events, Congress has passed a new law banning ______.
 
 [[2]]I couldn't imagine anything worse than ______ but then someone suggested I read up on ______.
 
 
 By the year 2020, ______ will become the most popular pastime in America. Why, you ask? There are many reasons, but the two most important factors are: ______ and ______.
 
-[[3]]Name three reasons that I, the current Card Czar, deserve a cupcake.
-</textarea>
-				<br/>
-			
-			
-			
-			
-				<div class="controlcontainer">
-					Card Size:
-					<br/>
-					<input type="radio" name="cardsize" value="S" class="control" checked=true />Small (2"x2")
-					<br/>
-					<input type="radio" name="cardsize" value="L" class="control" />Large (2.5"x3.5")
-					<br/>
-					<input type="radio" name="cardsize" value="LR" class="control" />Large w/Round Corners (2.5"x3.5")
-	
-				</div>
-				<div class="controlcontainer">
-					Page Layout:
-					<br/>
-					<input type="radio" name="pagelayout" value="tiled" class="control" checked=true />Tiled On 8.5"x11" Sheets
-					<br/>
-					<input type="radio" name="pagelayout" value="oneperpage" class="control" />One Card Per Page
-				</div>
-				<div class="controlcontainer">
-					Icon:
-					<br/>
-					<input type="radio" name="icon" value="default" class="control" checked=true />Default
-					<br/>
-					<input type="radio" name="icon" value="custom" class="control"/>Custom
-					<br/>
-					<input type="file" class=control name="iconfile"/>
-				</div>
-				<div class="controlcontainer">
-						<input type="submit" class="genbutton" value="Generate Cards" />
-				</div>				
-				<div class="more_header">
-					<br/>
-					<br/>
-					<u>Instructions:</u>
-					<br/>
-				</div>
-				<div class="more_text">
-				
-					<p>Seperate your white cards and black cards, and put one card on each line. White cards go on the left, black cards go on the right (duh).  If the line wraps, that's ok. Text will shrink as necessary to fit on each card. Zero-length lines won't get turned into cards, so you can separate each card with an empty line to distinguish between wrapping lines and the next card. However, lines containing only spaces will get turned into blank cards. </p>
-			
-					<p>The program will try to detect "Pick 2" and "Pick 3" black cards by the number of blanks in the card, but this can be specfied explicitly by adding [[2]] or [[3]] to the beginning or end of the line.</p>
-
-					<p>You can pick which card size you prefer, the small 2"x2" cards, which match the official PDFs released by <em>Cards Against Humanity</em>, large, rectangular 2.5"x3.5" cards which match the size of full-sized playing cards, or large 2.5"x3.5" with rounded corners.  The cards with rounded corners best match actual playing cards, but cutting the rounded corners will take much longer than cutting out perfectly rectangular cards.</p>
-
-					<p>You can specify as many cards as you want. White cards and black cards will be combined into a single pdf file. If you want, you can specify one card per page, with pages fitted to the size of the cards. Otherwise pdfs will be generated with cards tiled on 8.5"x11" pages. White cards and black cards are rendered on separate pages, with the pages of white cards first then the black cards. If the number of cards specified doesn't fit evenly on a page, the remainder of the page will be filled with blank cards. </p>
-			
-					<p>It is also possible to specify a custom icon, for the lower left hand corner of the cards. The icon will be automatically scaled to the right size. The icon file needs to be either a .jpg or .png file and less than 1MB in size.</p>
-
-					<p>Line text can be formatted with html-like tags. This is handled using the "inline_format" capabilities of the <a href="http://prawnpdf.org/api-docs/">Prawn Ruby library</a> that Bigger, Blacker Cards uses to generate PDF files. The following tags work when added to cards:</p>
-					<ul>
-						<li><strong>&lt;b&gt;&lt;/b&gt;</strong> Bold text. Note that card lettering is bold by default, so you may need to add a closing &lt;/b&gt; tag to eliminate the bold format, followed by another &lt;b&gt; tag to reinstate it.</li>
-						<li><strong>&lt;i&gt;&lt;/i&gt;</strong> Italic text.</li>
-						<li><strong>&lt;u&gt;&lt;/u&gt;</strong> Underlined text.</li>
-						<li><strong>&lt;strikethrough&gt;&lt;/strikethrough&gt;</strong> Strike-through text.</li>
-						<li><strong>&lt;sub&gt;&lt;/sub&gt;</strong> Subscript text.</li>
-						<li><strong>&lt;sup&gt;&lt;/sup&gt;</strong> Superscript text.</li>
-						<li><strong>&lt;br&gt;</strong> Line break.</li>
-						<li><strong>&lt;color rgb="#ff0000"&gt;&lt;/color&gt;</strong> Set color of text, in this example red.</li>
-						<li><strong>&lt;font name="Comic Sans MS"&gt;&lt;/font&gt;</strong> Set font of text, in this example "Comic Sans MS". Be sure to use a valid font name, otherwise the application will crash with an error. Valid fonts include:
+[[3]]Name three reasons that I, the current Card Czar, deserve a cupcake.</textarea>
+										</div>
+									</div>
+								</div>
+								<div class="row center">
+									<div class="col-md-4">
+										<h3>Card Size</h3>
+										<div class="radio">
+											<label>
+												<input type="radio" name="cardsize" value="1S" checked=true>
+												Small (2"x2")
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="cardsize" value="L">
+												Large (2.5"x3.5")
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="cardsize" value="LR">
+												Large w/Round Corners (2.5"x3.5")
+											</label>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<h3>Page Layout</h3>
+										<div class="radio">
+											<label>
+												<input type="radio" name="pagelayout" value="tiled" checked=true>
+												Tiled On 8.5"x11" Sheets
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="pagelayout" value="oneperpage">
+												One Card Per Page
+											</label>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<h3>Icon</h3>
+										<div class="radio">
+											<label>
+												<input type="radio" name="icon" value="default" checked=true>
+												Default
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="icon" value="custom">
+												Custom
+											</label>
+										</div>
+										<div class="input-group col-md-8 col-md-offset-2">
+											<span class="input-group-btn">
+												<span class="btn btn-primary btn-file">
+												Browse... <input type="file" multiple="">
+												</span>
+											</span>
+											<input type="text" class="form-control" readonly="">
+										</div>
+										<br>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-md-offset-3">
+										<div class="form-group">
+											<button type="submit" class="btn btn-lg btn-primary btn-block">Generate Cards</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="tab-pane fade in" id="instructions">
+						<h3 class="center">Using Bigger, Blacker Cards</h3>
+						<p>Seperate your white cards and black cards, and put one card on each line. White cards go on the left, black cards go on the right (duh).  If the line wraps, that's ok. Text will shrink as necessary to fit on each card. Zero-length lines won't get turned into cards, so you can separate each card with an empty line to distinguish between wrapping lines and the next card. However, lines containing only spaces will get turned into blank cards. </p>
+						<p>The program will try to detect "Pick 2" and "Pick 3" black cards by the number of blanks in the card, but this can be specfied explicitly by adding [[2]] or [[3]] to the beginning or end of the line.</p>
+						<p>You can pick which card size you prefer, the small 2"x2" cards, which match the official PDFs released by <em>Cards Against Humanity</em>, large, rectangular 2.5"x3.5" cards which match the size of full-sized playing cards, or large 2.5"x3.5" with rounded corners.  The cards with rounded corners best match actual playing cards, but cutting the rounded corners will take much longer than cutting out perfectly rectangular cards.</p>
+						<p>You can specify as many cards as you want. White cards and black cards will be combined into a single pdf file. If you want, you can specify one card per page, with pages fitted to the size of the cards. Otherwise pdfs will be generated with cards tiled on 8.5"x11" pages. White cards and black cards are rendered on separate pages, with the pages of white cards first then the black cards. If the number of cards specified doesn't fit evenly on a page, the remainder of the page will be filled with blank cards. </p>
+						<p>It is also possible to specify a custom icon, for the lower left hand corner of the cards. The icon will be automatically scaled to the right size. The icon file needs to be either a .jpg or .png file and less than 1MB in size.</p>
+						<p>Line text can be formatted with html-like tags. This is handled using the "inline_format" capabilities of the <a href="http://prawnpdf.org/api-docs/">Prawn Ruby library</a> that Bigger, Blacker Cards uses to generate PDF files. The following tags work when added to cards:</p>
 						<ul>
-							<li>Helvetica (the default)</li>
-							<li>Arial</li>
-							<li>Arial Black</li>
-							<li>Andale Mono</li>
-							<li>Comic Sans MS</li>
-							<li>Courier</li>
-							<li>Courier New</li>
-							<li>Georgia</li>
-							<li>Impact</li>
-							<li>Times-Roman</li>
-							<li>Times New Roman</li>
-							<li>Trebuchet MS</li>
-							<li>Verdana</li>
+							<li><strong>&lt;b&gt;&lt;/b&gt;</strong> Bold text. Note that card lettering is bold by default, so you may need to add a closing &lt;/b&gt; tag to eliminate the bold format, followed by another &lt;b&gt; tag to reinstate it.</li>
+							<li><strong>&lt;i&gt;&lt;/i&gt;</strong> Italic text.</li>
+							<li><strong>&lt;u&gt;&lt;/u&gt;</strong> Underlined text.</li>
+							<li><strong>&lt;strikethrough&gt;&lt;/strikethrough&gt;</strong> Strike-through text.</li>
+							<li><strong>&lt;sub&gt;&lt;/sub&gt;</strong> Subscript text.</li>
+							<li><strong>&lt;sup&gt;&lt;/sup&gt;</strong> Superscript text.</li>
+							<li><strong>&lt;br&gt;</strong> Line break.</li>
+							<li><strong>&lt;color rgb="#ff0000"&gt;&lt;/color&gt;</strong> Set color of text, in this example red.</li>
+							<li><strong>&lt;font name="Comic Sans MS"&gt;&lt;/font&gt;</strong> Set font of text, in this example "Comic Sans MS". Be sure to use a valid font name, otherwise the application will crash with an error. Valid fonts include:
+							<ul>
+								<li>Helvetica (the default)</li>
+								<li>Arial</li>
+								<li>Arial Black</li>
+								<li>Andale Mono</li>
+								<li>Comic Sans MS</li>
+								<li>Courier</li>
+								<li>Courier New</li>
+								<li>Georgia</li>
+								<li>Impact</li>
+								<li>Times-Roman</li>
+								<li>Times New Roman</li>
+								<li>Trebuchet MS</li>
+								<li>Verdana</li>
+							</ul>
 						</ul>
-					</ul>
-			
-
+					</div>
+					<div class="tab-pane fade" id="source">
+						<h3 class="center">Source Code</h3>
+						<p>Unlike some other card generators, Bigger, Blacker Cards is 100% open source, available on github under the terms of the GNU GPL: <a href="https://github.com/bbcards/bbcards">https://github.com/bbcards/bbcards</a></p>
+						<p>It works as a web CGI script </em>or</em> as a standalone card generation script that can be run from the command line, on any system with ruby and prawn installed, though it's only been tested on linux.</p>
+						<p>However, this is something of a one-off side project for me. I created this to make myself a few custom cards in the format I wanted, and felt the need to share. What that means is that while the code is free, and you are free to modify it, I probably won't be doing much maintenance work.  If you fork the project on github and send a pull request I may get around to merging it... but it might take a bit of time. If a competent developer wants to create a more active fork on github and take over active development, I won't complain. </p>
+					</div>
+					<div class="tab-pane fade" id="legal">
+						<h3 class="center">Other Legal Stuff</h3>
+							<p>I'm going to reiterate the legal disclaimer at the top of the page in slightly larger sized text down here, and expand on it a bit. </p>
+							<p>This site is not affiliated with nor endorsed by Cards Against Humanity, LLC. Cards Against Humanity is a trademark of Cards Against Humanity LLC. Cards Against Humanity is distributed under a Creative Commons BY-NC-SA 2.0 license - that means you can freely use and modify the game but aren't allowed to make money from it without the permission of Cards Against Humanity LLC.</p>
+							<p>There is no donation button on this page, and I'm not making a cent from this project, complying with the required Creative Commons License. All code for this project is open source. I merely enjoy Cards Against Humanity, and wanted a more flexible custom card generator than what was currently available.</p>
+							<p>Also, this should go without saying, but I'm going to say it anyway: Don't use this tool to infringe anyone's intellectual property. Do NOT just plug in the text for existing non-public card packs, that Cards Against Humanity, LLC is selling. That's just not cool. Instead, go to <a href="http://www.cardsagainsthumanity.com">http://www.cardsagainsthumanity.com</a>, and buy their stuff. They made an awesome game, they deserve your money. This tool is for making <em>your own</em> cards, not theirs. That's why there's an option to make big 2.5"x3.5" cards -- that way you can print your own custom cards that are the same size as the official, purchased cards, so they can be used together.</p>
+							<p>One final legal note regarding fonts: One of the benefits of this card generator is that it can produce pdf files with cards in custom fonts. The majority of custom fonts available are the ones in <a href="https://en.wikipedia.org/wiki/Core_fonts_for_the_Web">Microsoft's Core fonts for the web</a>. The license for these fonts specifies that they are free for non-commercial use but may not be used in a commercial product or be distributed in a repackaged form. For this reason the source code for this project does not include these font files. Instead these fonts are loaded from /usr/share/fonts/truetype/msttcorefonts, the location of these fonts on Debian-based linux systems when the "ttf-mscorefonts-installer" package is installed. Since this project is non-commercial (again, I make no money whatsoever from this), and I'm not redistributing the collection of fonts, merely including them in documents produced by this generator, I believe that this application complies with the terms of the EULA for these fonts.</p>
+					</div>
+					<div class="tab-pane fade" id="donate">
+						<h3 class="center">Thanks For Your Support</h3>
+						</div>
+					</div>
 				</div>
-				<div class="more_header">
-					<br/>
-					<br/>
-					<u>Source Code:</u>
-					<br/>
-				</div>
-				<div class="more_text">
-					<p>Unlike some other card generators, Bigger, Blacker Cards is 100% open source, available on github under the terms of the GNU GPL: <a href="https://github.com/bbcards/bbcards">https://github.com/bbcards/bbcards</a></p>
-					<p>It works as a web CGI script </em>or</em> as a standalone card generation script that can be run from the command line, on any system with ruby and prawn installed, though it's only been tested on linux.</p>
-
-					<p>However, this is something of a one-off side project for me. I created this to make myself a few custom cards in the format I wanted, and felt the need to share. What that means is that while the code is free, and you are free to modify it, I probably won't be doing much maintenance work.  If you fork the project on github and send a pull request I may get around to merging it... but it might take a bit of time. If a competent developer wants to create a more active fork on github and take over active development, I won't complain. </p>
-				</div>
-
-					<div class="more_header">
-					<br/>
-					<br/>
-					<u>More Legal Crap:</u>
-					<br/>
-				</div>
-				<div class="more_text">
-					<p>I'm going to reiterate the legal disclaimer at the top of the page in slightly larger sized text down here, and expand on it a bit. </p>
-					
-					<p>This site is not affiliated with nor endorsed by Cards Against Humanity, LLC. Cards Against Humanity is a trademark of Cards Against Humanity LLC. Cards Against Humanity is distributed under a Creative Commons BY-NC-SA 2.0 license - that means you can freely use and modify the game but aren't allowed to make money from it without the permission of Cards Against Humanity LLC.</p>
-					
-					<p>There is no donation button on this page, and I'm not making a cent from this project, complying with the required Creative Commons License. All code for this project is open source. I merely enjoy Cards Against Humanity, and wanted a more flexible custom card generator than what was currently available.</p>
-				
-					<p>Also, this should go without saying, but I'm going to say it anyway: Don't use this tool to infringe anyone's intellectual property. Do NOT just plug in the text for existing non-public card packs, that Cards Against Humanity, LLC is selling. That's just not cool. Instead, go to <a href="http://www.cardsagainsthumanity.com">http://www.cardsagainsthumanity.com</a>, and buy their stuff. They made an awesome game, they deserve your money. This tool is for making <em>your own</em> cards, not theirs. That's why there's an option to make big 2.5"x3.5" cards -- that way you can print your own custom cards that are the same size as the official, purchased cards, so they can be used together.</p>
-
-					<p>One final legal note regarding fonts: One of the benefits of this card generator is that it can produce pdf files with cards in custom fonts. The majority of custom fonts available are the ones in <a href="https://en.wikipedia.org/wiki/Core_fonts_for_the_Web">Microsoft's Core fonts for the web</a>. The license for these fonts specifies that they are free for non-commercial use but may not be used in a commercial product or be distributed in a repackaged form. For this reason the source code for this project does not include these font files. Instead these fonts are loaded from /usr/share/fonts/truetype/msttcorefonts, the location of these fonts on Debian-based linux systems when the "ttf-mscorefonts-installer" package is installed. Since this project is non-commercial (again, I make no money whatsoever from this), and I'm not redistributing the collection of fonts, merely including them in documents produced by this generator, I believe that this application complies with the terms of the EULA for these fonts.</p>
-				</div>
-
 			</div>
-		</form>
+		</div>
 	</body>
-
 </html>
