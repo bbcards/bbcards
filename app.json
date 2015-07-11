@@ -2,6 +2,6 @@
   "name": "Bigger, Blacker Cards",
   "description": "A custom card generator for Cards Against Humanity",
   "repository": "https://github.com/aaronrl/bbcards",
-  "logo": "",
+  "logo": "https://raw.githubusercontent.com/aaronrl/bbcards/master/favicon.ico",
   "keywords": ["generator", "ruby", "cards"]
 }
