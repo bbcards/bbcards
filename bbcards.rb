@@ -162,6 +162,8 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 			card_text = card_text.gsub(/\\t/,   "\t")
 
 			card_text = card_text.gsub("<b>", "[[[b]]]")
+			card_text = card_text.gsub("<ő>", "[[[ő]]]")
+			card_text = card_text.gsub("<ű>", "[[[ű]]]")
 			card_text = card_text.gsub("<i>", "[[[i]]]")
 			card_text = card_text.gsub("<u>", "[[[u]]]")
 			card_text = card_text.gsub("<strikethrough>", "[[[strikethrough]]]")
