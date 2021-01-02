@@ -31,9 +31,8 @@ require "prawn/measurement_extensions"
 MM_PER_INCH=25.4
 
 PAPER_NAME   = "LETTER"
-PAPER_HEIGHT = (MM_PER_INCH*11.0).mm;
-PAPER_WIDTH  = (MM_PER_INCH*8.5).mm;
-
+$paper_height = (MM_PER_INCH*11.0).mm
+$paper_width  = (MM_PER_INCH*8.5).mm
 
 def get_card_geometry(card_width_inches=2.0, card_height_inches=2.0, rounded_corners=false, one_card_per_page=false)
 	card_geometry = Hash.new
@@ -47,8 +46,8 @@ def get_card_geometry(card_width_inches=2.0, card_height_inches=2.0, rounded_cor
 		card_geometry["paper_width"]       = card_geometry["card_width"]
 		card_geometry["paper_height"]      = card_geometry["card_height"]
 	else
-		card_geometry["paper_width"]       = PAPER_WIDTH
-		card_geometry["paper_height"]      = PAPER_HEIGHT
+		card_geometry["paper_width"]       = $paper_width
+		card_geometry["paper_height"]      = $paper_height
 	end
 
 
@@ -136,11 +135,11 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 
 	
 	if(is_black)
-		pdf.canvas do
-			pdf.rectangle(pdf.bounds.top_left,pdf.bounds.width, pdf.bounds.height)
-		end
+	#	pdf.canvas do
+#			pdf.rectangle(pdf.bounds.top_left,pdf.bounds.width, pdf.bounds.height)
+	#	end
 
-		pdf.fill_and_stroke(:fill_color=>"000000", :stroke_color=>"000000") do
+		pdf.fill_and_stroke(:fill_color=>$black_bg, :stroke_color=>$black_bg) do
 			pdf.canvas do
 				pdf.rectangle(pdf.bounds.top_left,pdf.bounds.width, pdf.bounds.height)
 			end
@@ -292,8 +291,8 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 				pdf.fill_and_stroke(:fill_color=>"ffffff", :stroke_color=>"ffffff") do
 					pdf.circle([pdf.bounds.right-10,pdf.bounds.bottom+15.5],7.5)
 				end
-				pdf.stroke_color '000000'
-				pdf.fill_color '000000'
+				pdf.stroke_color $black_bg
+				pdf.fill_color $black_bg
 				pdf.text_box "2", color:"000000", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+21]
 				pdf.stroke_color "ffffff"
 				pdf.fill_color "ffffff"
@@ -305,8 +304,8 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 				pdf.fill_and_stroke(:fill_color=>"ffffff", :stroke_color=>"ffffff") do
 					pdf.circle([pdf.bounds.right-10,pdf.bounds.bottom+15.5],7.5)
 				end
-				pdf.stroke_color '000000'
-				pdf.fill_color '000000'
+				pdf.stroke_color $black_bg
+				pdf.fill_color $black_bg
 				pdf.text_box "3", color:"000000", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+21]
 				pdf.stroke_color "ffffff"
 				pdf.fill_color "ffffff"
@@ -316,8 +315,8 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 				pdf.fill_and_stroke(:fill_color=>"ffffff", :stroke_color=>"ffffff") do
 					pdf.circle([pdf.bounds.right-10,pdf.bounds.bottom+35.5],7.5)
 				end
-				pdf.stroke_color '000000'
-				pdf.fill_color '000000'
+				pdf.stroke_color $black_bg
+				pdf.fill_color $black_bg
 				pdf.text_box "2", color:"000000", size:14, width:8, align: :center, at:[pdf.bounds.right-14,pdf.bounds.bottom+41]
 				pdf.stroke_color "ffffff"
 				pdf.fill_color "ffffff"
@@ -325,8 +324,8 @@ def render_card_page(pdf, card_geometry, icon, statements, is_black)
 		end
 	end
 	draw_logos(pdf, card_geometry, icon)
-	pdf.stroke_color "000000"
-	pdf.fill_color "000000"
+	pdf.stroke_color $black_bg
+	pdf.fill_color $black_bg
 
 end
 
@@ -587,8 +586,10 @@ def print_help
 	puts "cards are produced by default."
 	puts ""
 	puts "All flags:"
+	puts "\t-a,--a4\t\t\tA4 sized paper"
 	puts "\t-b,--black\t\tBlack card file"
 	puts "\t-d,--dir\t\tDirectory to search for card files"
+	puts "\t-g,--gray\t\tSave ink and print black in gray"
 	puts "\t-h,--help\t\tPrint this Help message"
 	puts "\t-i,--icon\t\tIcon file, should be .jpg or .png"
 	puts "\t-l,--large\t\tGenerate large 2.5\"x3.5\" cards"
@@ -647,6 +648,10 @@ else
 	arg_defs["-o"]          = "output"
 	arg_defs["-output"]     = "output"
 
+	flag_defs["-a"]            = "a4"
+	flag_defs["--a4"]          = "a4"
+	flag_defs["-g"]            = "gray"
+	flag_defs["--gray"]        = "gray"
 	flag_defs["-s"]            = "small"
 	flag_defs["--small"]       = "small"
 	flag_defs["-l"]            = "large"
@@ -658,8 +663,19 @@ else
 	flag_defs["-h"]            = "help"
 	flag_defs["--help"]        = "help"
 
-
 	args = parse_args(arg_defs, flag_defs)
+
+    if args.has_key? "a4"
+        $paper_height = (MM_PER_INCH * 11.7).mm
+        $paper_width  = (MM_PER_INCH * 8.3).mm
+    end
+
+    if args.has_key? "gray"
+        $black_bg = "999999"
+    else
+        $black_bg = "000000"
+    end
+
 	card_geometry = get_card_geometry(2.0,2.0, !(args["rounded"]).nil?, !(args["oneperpage"]).nil? )
 	if args.has_key? "large"
 		card_geometry = get_card_geometry(2.5,3.5, (not (args["rounded"]).nil?), (not (args["oneperpage"]).nil? ))
